@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Music Player</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/player.css')}}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   
+</head>
+<body>
+    <img id="background" />
+    <audio id="song"></audio>
+
+    <div class="container">  
+        <div class="box"></div>      
+        <img id="thumbnail" />
+        
+        <img onclick="playPause()" id="play-pause" />
+        <img onclick="nextSong()" id="next-song" />
+        <img onclick="previousSong()" id="previous-song" />
+
+        <div class="song-artist">Beyonce</div>
+        <div class="song-title">Don't Hurt Yourself</div>
+
+        <!-- Input element for progress bar - min=0 starting value of every song - max length will change per song so leave empty -->
+        
+        <input 
+            type="range" 
+            id="progress-bar" 
+            min="0" 
+            max="" 
+            value="0" 
+            onchange="changeProgressBar()"
+        />
+
+        <div class="currentTime"></div>
+        <div class="durationTime"></div>
+        <div id="foo">
+            {% for item in Index %}
+                <button id="place_for_suggestions" style="color: white;" onclick="suggestedSong({{ item|safe }})">Home</button>
+            {% endfor %}
+            <div class="camera" >
+            <video id="video">Video stream not available.</video>
+            </div>
+            <br><br><br><br>
+
+            <!---<div><button id="clickbutton">START</button></div>
+            <br>
+            <div><button id="startbutton">Take photo</button></div> 
+            <br>
+            <div><button id="stopbutton">STOP</button></div> -->
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-primary" id="clickbutton">START</button>
+                <button type="button" class="btn btn-primary" id="startbutton">TAKE PHOTO</button>
+                <button type="button" class="btn btn-primary" id="stopbutton">STOP</button>
+                <button type="button" class="btn btn-primary" id="suggest-btn">SUGGEST</button>
+            </div>
+            
+            <canvas id="canvas"></canvas>
+
+            <!-- The part below displays the captures -->
+            <div class="output">
+                <img id="photo" alt="The screen capture will appear in this box.">
+            </div>
+        </div>
+        <div><button id="hidden_btn" style="display: none;">Hidden Btn</button>
+    </div>
+
+    <script src="{{url_for('static', filename='js/player.js')}}"></script>
+    
+</body>
+</html>
